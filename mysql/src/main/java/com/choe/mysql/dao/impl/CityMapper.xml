@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choe.mysql.dao.CityMapper">
+
+
+    <select id="select" parameterType="CityBean" resultType="CityBean">
+
+
+        select * from city_areas where 1 =1
+        <if test="grade !=null">
+            and grade = #{grade}
+        </if>
+        <if test="parent_code !=null">
+            and parent_code = #{parent_code}
+        </if>
+
+    </select>
+</mapper>
