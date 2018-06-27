@@ -20,6 +20,9 @@ import org.springframework.util.StringUtils;
  */
 @Service
 @Transactional
+/**
+ * 测试事务
+ */
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
