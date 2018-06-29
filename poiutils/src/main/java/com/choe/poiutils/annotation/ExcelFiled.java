@@ -21,8 +21,8 @@ import java.lang.annotation.Target;
 public @interface ExcelFiled {
     /**表格列名*/
     String colName() default "";
-    /**表格宽度*/
+    /**列宽度*/
     int colWidth() default 4000;
-
+    /**列序号*/
     int colIndex() default 1;
 }
