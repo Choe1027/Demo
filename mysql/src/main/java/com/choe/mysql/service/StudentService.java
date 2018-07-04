@@ -16,4 +16,7 @@ public interface StudentService {
     Student add(Student student);
 
     Student update(Student student);
+
+
+    Student addByEasy();
 }

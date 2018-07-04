@@ -43,4 +43,10 @@ public class StudentServiceImpl implements StudentService {
     public Student update(Student student) {
         return null;
     }
+
+
+    @Override
+    public Student addByEasy() {
+        return null;
+    }
 }

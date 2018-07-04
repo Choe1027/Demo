@@ -70,6 +70,11 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>easysql</artifactId>
+            <version>1.0.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
