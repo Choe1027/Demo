@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author cyk
  * @date 2018/7/5/005 13:49
  * @email choe0227@163.com
- * @desc
+ * @desc  发布线程，发布事件
  * @modifier
  * @modify_time
  * @modify_remark

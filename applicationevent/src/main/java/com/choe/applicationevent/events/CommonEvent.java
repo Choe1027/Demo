@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEvent;
  * @author cyk
  * @date 2018/7/5/005 11:51
  * @email choe0227@163.com
- * @desc
+ * @desc 通用的事件
  * @modifier
  * @modify_time
  * @modify_remark
