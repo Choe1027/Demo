@@ -5,11 +5,12 @@ import com.choe.mysql.service.StudentService2;
 import com.example.shyFly.easySql.EasySqlExecution;
 import com.example.shyFly.easySql.bean.EasySqlResult;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author cyk
@@ -24,13 +25,16 @@ import java.util.List;
 @Transactional
 public class StudentServiceImpl2 implements StudentService2 {
 
-    @Autowired
+//    @Autowired
     private EasySqlExecution easySqlExecution;
 
+    @PostConstruct
+    public void init(){
+        easySqlExecution = new EasySqlExecution();
+
+    }
     @Override
     public Student2 addByEasy(Student2 student2) {
-
-
         return easySqlExecution.add(student2);
     }
 

@@ -7,6 +7,7 @@ import com.example.shyFly.easySql.bean.EasySqlResult;
 import com.example.shyFly.easySql.bean.OperMark;
 import com.example.shyFly.easySql.bean.SpliceBean;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,13 @@ public class EasySqlTest {
     @Autowired
     private StudentService2 studentService2;
 
-    @Autowired
+//    @Autowired
     private EasySqlExecution easySqlExecution;
+
+    @Before
+    public void init(){
+        easySqlExecution = new EasySqlExecution();
+    }
 
     @Test
     public void testAdd(){
