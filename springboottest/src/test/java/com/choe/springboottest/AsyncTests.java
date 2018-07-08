@@ -1,6 +1,6 @@
 package com.choe.springboottest;
 
-import com.choe.springboottest.config.PropertyConfig;
+import com.choe.springboottest.syncthread.AsyncTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,15 +10,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringboottestApplicationTests {
+public class AsyncTests {
 
     @Autowired
-    private PropertyConfig choeSettings;
-
+    private AsyncTest async;
 
     @Test
-    public void contextLoads() {
-        System.out.println("name "+choeSettings.getName() + "+===age ="+ choeSettings.getAge() +"==address="+choeSettings.getAddress());
+    public void asyncTest(){
+
+
     }
 
 }
