@@ -3,6 +3,9 @@ package com.choe.springboottest.jpa.repositorys;
 import com.choe.springboottest.jpa.domain.JPAStudent;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
  * @modify_time
  * @modify_remark
  */
-public interface JpaStudentRepository extends JpaRepository<JPAStudent,Long> {
+public interface JpaStudentRepository extends JpaRepository<JPAStudent,Long> , JpaSpecificationExecutor<JPAStudent> {
 
     /*
      * 关于查询名称的定义需要符合规范才能够被编译
@@ -27,5 +30,17 @@ public interface JpaStudentRepository extends JpaRepository<JPAStudent,Long> {
     List<JPAStudent> findByStudentName(String name);
 
     List<JPAStudent> findByStudentNameLike(String name);
+
+    List<JPAStudent> findByHeightIsNull();
+
+    List<JPAStudent> findTopByStudentName(String name);
+
+    List<JPAStudent> findByHeightBetween(int gte, int lte);
+
+    @Query("select jpa from JPAStudent jpa where jpa.studentName = :studentName order by id desc")
+    List<JPAStudent> getAllStudentOrderByIdDesc(@Param("studentName") String name);
+
+    @Query("select jpa from JPAStudent jpa where jpa.studentName = ?1 order by id desc")
+    List<JPAStudent> getAllStudent( String name);
 
 }

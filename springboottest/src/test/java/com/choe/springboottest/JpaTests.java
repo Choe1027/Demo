@@ -10,10 +10,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  * @author cyk
@@ -120,6 +127,35 @@ public class JpaTests {
         System.out.println("jpa==="+jpa);
         List<JPAStudent> jpaLike = jpaStudentRepository.findByStudentNameLike("%jpa%");
         System.out.println("jpaLike==="+jpaLike);
+        List<JPAStudent> byHeightIsNull = jpaStudentRepository.findByHeightIsNull();
+        System.out.println("byHeightIsNull==="+byHeightIsNull);
+        List<JPAStudent> heightBetween = jpaStudentRepository.findByHeightBetween(100,188);
+        System.out.println("heightBetween==="+heightBetween);
+        List<JPAStudent> topByStudent = jpaStudentRepository.findTopByStudentName("easysql");
+        System.out.println("topByStudent==="+topByStudent);
+        List<JPAStudent> getALL = jpaStudentRepository.getAllStudentOrderByIdDesc("easysql");
+        System.out.println("getALL==="+getALL);
+        List<JPAStudent> getALL2 = jpaStudentRepository.getAllStudent("easysql");
+        System.out.println("getALL2==="+getALL2);
 
+    }
+
+    @Test
+    public void testCriteriaBuilder(){
+
+        List<JPAStudent> bySpecification = jpaStudentRepository.findAll(new Specification<JPAStudent>() {
+            @Override
+            public Predicate toPredicate(Root<JPAStudent> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                Path<Integer> height = root.get("height");
+                Path<String> studentName = root.get("studentName");
+
+                Predicate le = criteriaBuilder.le(height, 188);
+                Predicate ge = criteriaBuilder.ge(height, 100);
+                Predicate equal = criteriaBuilder.equal(studentName, "easysql");
+                return criteriaBuilder.and(le, ge, equal);
+            }
+        });
+        System.out.println("bySpecification==="+bySpecification);
     }
 }
