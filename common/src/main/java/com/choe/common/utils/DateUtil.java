@@ -14,29 +14,27 @@ public class DateUtil {
 	/** 缺省格式 */
 	private String pattern = "yyyy-MM-dd HH:mm:ss";
 	
-	/** 一天的毫秒数 */
-	private final long oneDayTime = 24*3600*1000;
-	
 	/** 缺省实例 */
 	private static DateUtil defaultUtil = new DateUtil();
-
+	/** 一天的毫秒数 */
+	private final long oneDayTime = 24*3600*1000;
 
 	// 年月日
-	public static final SimpleDateFormat DATE_FORMAT_0 = new SimpleDateFormat("yy/MM/dd");
+	public static final String DATE_FORMAT_0 = "yy/MM/dd";
 	// 年月日
-	public static final SimpleDateFormat DATE_FORMAT_1 = new SimpleDateFormat("yyyy-MM-dd");
+	public static final String DATE_FORMAT_1 = "yyyy-MM-dd";
 	// 年月
-	public static final SimpleDateFormat DATE_FORMAT_2 = new SimpleDateFormat("yyyyMM");
+	public static final String DATE_FORMAT_2 = "yyyyMM";
 	// 年月日时分秒
-	public static final SimpleDateFormat DATE_FORMAT_3 = new SimpleDateFormat("yyyyMMddHHmmss");
+	public static final String DATE_FORMAT_3 = "yyyyMMddHHmmss";
 	// yyyy-MM-dd HH:mm:ss
-	public static final SimpleDateFormat DATE_FORMAT_4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final String DATE_FORMAT_4 = "yyyy-MM-dd HH:mm:ss";
 	// 年月日时分秒毫秒
-	public static final SimpleDateFormat DATE_FORMAT_5 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+	public static final String DATE_FORMAT_5 = "yyyyMMddHHmmssSSS";
     // 年月日时
-    public static final SimpleDateFormat DATE_FORMAT_6 = new SimpleDateFormat("yyyy-MM-dd_HH");
+    public static final String DATE_FORMAT_6 = "yyyy-MM-dd_HH";
 
-	public static final SimpleDateFormat DATE_FORMAT_7 = new SimpleDateFormat("yyyyMMdd");
+	public static final String DATE_FORMAT_7 = "yyyyMMdd";
 
 	
 	public DateUtil(){}
@@ -47,6 +45,11 @@ public class DateUtil {
 	public DateUtil(String pattern) {
 		this.pattern = pattern;
 	}
+
+	/**
+	 * 将simpleDateFormat 与当前使用的线程绑定，避免在使用频率较高的情况下重复创建SimpleDateFormat 对象
+	 */
+	private static ThreadLocal <SimpleDateFormat> simpleDateFormatThreadLocal = new ThreadLocal<>();
 	
 	/**
 	 * 将字符串转换为毫秒数
@@ -54,25 +57,47 @@ public class DateUtil {
 	 * @return	毫秒数
 	 */
 	public Long dateStrToLong(String dateStr) {
-		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		SimpleDateFormat sdf = getSimpleDateFormat(pattern);
 		Long timeStart = 0l;
 		try {
 			timeStart = sdf.parse(dateStr).getTime();
 		} catch (ParseException e) {
 			e.printStackTrace();
-//			LoggerUtil.error(this.getClass(), e);
-//			throw new CommonException(e);
 		}
 		return timeStart;
 	}
-	
+
+	/**
+	 * 获取SimpleDateFormat
+	 * @return
+	 */
+	private static  SimpleDateFormat getSimpleDateFormat(){
+		SimpleDateFormat simpleDateFormat = simpleDateFormatThreadLocal.get();
+		if (simpleDateFormat == null){
+			simpleDateFormat = new SimpleDateFormat();
+		}
+		return simpleDateFormat;
+	}
+
+	/**
+	 *  获取SimpleDateFormat
+	 * @param pattern
+	 * @return
+	 */
+	private static SimpleDateFormat getSimpleDateFormat(String pattern){
+		SimpleDateFormat simpleDateFormat = getSimpleDateFormat();
+		simpleDateFormat.applyPattern(pattern);
+		return simpleDateFormat;
+	}
 	/**
 	 * 将毫秒数转换为可显示的字符串
 	 * @param dateLong	毫秒数
 	 * @return	对应格式的时间字符串
 	 */
 	public  String dateLongToString(Long dateLong) {
-		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		SimpleDateFormat sdf = getSimpleDateFormat(pattern);
 		Date date = new Date(dateLong);
 		return sdf.format(date);
 	}
@@ -273,7 +298,7 @@ public class DateUtil {
 	 */
 	public static Date getStartTime(String date) throws ParseException {
 		Calendar c = Calendar.getInstance();
-		c.setTime(DATE_FORMAT_1.parse(date));
+		c.setTime(getSimpleDateFormat(DATE_FORMAT_1).parse(date));
 		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
@@ -305,7 +330,7 @@ public class DateUtil {
 	 */
 	public static Date getEndTime(String date) throws ParseException {
 		Calendar c = Calendar.getInstance();
-		c.setTime(DATE_FORMAT_1.parse(date));
+		c.setTime(getSimpleDateFormat(DATE_FORMAT_1).parse(date));
 		c.set(Calendar.HOUR_OF_DAY, 23);
 		c.set(Calendar.MINUTE, 59);
 		c.set(Calendar.SECOND, 59);
@@ -358,12 +383,13 @@ public class DateUtil {
 	 * @return yyyymm
 	 */
 	public static String getYm() {
-		return getDateTime(DATE_FORMAT_2, getDateTime());
+
+		return getDateTime(getSimpleDateFormat(DATE_FORMAT_2), getDateTime());
 	}
 
 
 	public static String date2FmtString(Date date) {
-		return DATE_FORMAT_1.format(date);
+		return getSimpleDateFormat(DATE_FORMAT_1).format(date);
 	}
 
 }
