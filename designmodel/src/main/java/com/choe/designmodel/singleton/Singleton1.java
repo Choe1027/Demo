@@ -4,7 +4,7 @@ package com.choe.designmodel.singleton;
  * @author cyk
  * @date 2018/7/25/025 14:35
  * @email choe0227@163.com
- * @desc 饿汉式单例
+ * @desc 饿汉式单例，线程安全
  * @modifier
  * @modify_time
  * @modify_remark
