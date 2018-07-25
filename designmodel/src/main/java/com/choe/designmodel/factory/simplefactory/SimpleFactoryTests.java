@@ -16,11 +16,13 @@ public class SimpleFactoryTests {
 
     public static void main(String[] args) {
 
+        // 模仿调用接口的请求参数
         Role role = new Role();
         role.setName("深海泰坦");
         role.setSex(0);
         role.setType(Role.RoleType.TANK);
 
+        // 逻辑处理
         RoleFactory factory = RoleManger.factory(role);
         Role createRole = factory.create(role);
         System.out.println(createRole.toString());
