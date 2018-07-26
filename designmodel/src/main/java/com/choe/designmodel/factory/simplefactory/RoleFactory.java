@@ -1,6 +1,8 @@
 package com.choe.designmodel.factory.simplefactory;
 
 import com.choe.designmodel.factory.domain.Role;
+import com.choe.designmodel.factory.domain.SupportRole;
+import com.choe.designmodel.factory.domain.TankRole;
 
 /**
  * @author cyk
@@ -13,12 +15,12 @@ import com.choe.designmodel.factory.domain.Role;
  */
 public class RoleFactory {
 
-    public static Role factory(Role role){
+    public static Role create(Role.RoleType roleType){
 
-        if (role.getType() == Role.RoleType.TANK){
-            return new TankRoleCreator().create(role);
-        }else if(role.getType() == Role.RoleType.SUPPORT){
-            return new SupportRoleCreator().create(role);
+        if (roleType == Role.RoleType.TANK){
+            return new TankRole();
+        }else if(roleType == Role.RoleType.SUPPORT){
+            return new SupportRole();
         }else {
             throw new IllegalArgumentException("位置的角色类型");
         }
