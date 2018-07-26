@@ -12,7 +12,7 @@ import com.choe.designmodel.factory.domain.TankRole;
  * @modify_time
  * @modify_remark
  */
-public class TankRoleFactory implements RoleFactory {
+public class TankRoleCreator implements RoleCreator {
     @Override
     public Role create(Role role) {
         TankRole tankRole = new TankRole();

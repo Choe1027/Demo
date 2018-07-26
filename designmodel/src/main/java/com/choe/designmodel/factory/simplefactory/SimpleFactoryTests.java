@@ -23,8 +23,7 @@ public class SimpleFactoryTests {
         role.setType(Role.RoleType.TANK);
 
         // 逻辑处理
-        RoleFactory factory = RoleManger.factory(role);
-        Role createRole = factory.create(role);
+        Role createRole  = RoleFactory.factory(role);
         System.out.println(createRole.toString());
     }
 }

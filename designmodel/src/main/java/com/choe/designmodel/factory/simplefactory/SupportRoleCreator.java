@@ -12,7 +12,7 @@ import com.choe.designmodel.factory.domain.SupportRole;
  * @modify_time
  * @modify_remark
  */
-public class SupportRoleFactory implements RoleFactory {
+public class SupportRoleCreator implements RoleCreator {
 
     @Override
     public Role create(Role role) {
