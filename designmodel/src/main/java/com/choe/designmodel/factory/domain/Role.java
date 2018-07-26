@@ -61,8 +61,11 @@ public class Role implements Serializable {
     }
 
     public enum RoleType{
-        TANK(0,"坦克"),
-        SUPPORT(1,"辅助");
+        SWORDSMAN(0,"鬼剑士"),
+        HOLYPRIEST(1,"圣职者"),
+        DARKWARRIOR(2,"黑暗武士"),
+        SHARPSHOOTER(3,"神枪手"),
+        MAGE(4,"法师");
         private int typeCode;
         private String name;
 

@@ -17,7 +17,7 @@ public class SimpleFactoryTests {
     public static void main(String[] args) {
 
         // 逻辑处理
-        Role createRole  = RoleFactory.create(Role.RoleType.TANK);
+        Role createRole  = RoleFactory.create(Role.RoleType.SWORDSMAN);
         System.out.println(createRole.toString());
     }
 }

@@ -1,8 +1,8 @@
 package com.choe.designmodel.factory.simplefactory;
 
+import com.choe.designmodel.factory.domain.FemaleMageRole;
+import com.choe.designmodel.factory.domain.MaleSwordManRole;
 import com.choe.designmodel.factory.domain.Role;
-import com.choe.designmodel.factory.domain.SupportRole;
-import com.choe.designmodel.factory.domain.TankRole;
 
 /**
  * @author cyk
@@ -17,12 +17,12 @@ public class RoleFactory {
 
     public static Role create(Role.RoleType roleType){
 
-        if (roleType == Role.RoleType.TANK){
-            return new TankRole();
-        }else if(roleType == Role.RoleType.SUPPORT){
-            return new SupportRole();
+        if (roleType == Role.RoleType.SWORDSMAN){
+            return new MaleSwordManRole();
+        }else if(roleType == Role.RoleType.MAGE){
+            return new FemaleMageRole();
         }else {
-            throw new IllegalArgumentException("位置的角色类型");
+            throw new IllegalArgumentException("未知的角色类型");
         }
     }
 }

@@ -2,17 +2,16 @@ package com.choe.designmodel.factory.domain;
 
 /**
  * @author cyk
- * @date 2018/7/25/025 17:31
+ * @date 2018/7/26/026 10:05
  * @email choe0227@163.com
  * @desc
  * @modifier
  * @modify_time
  * @modify_remark
  */
-public class TankRole extends Role {
+public class MaleSwordManRole extends Role {
 
-    public TankRole() {
-        super();
-        setDesc("我很耐*,都来打我啊");
+    public MaleSwordManRole() {
+        setDesc("老马的亲儿子");
     }
 }
