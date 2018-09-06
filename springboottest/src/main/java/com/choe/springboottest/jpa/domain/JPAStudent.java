@@ -18,20 +18,8 @@ import javax.persistence.Table;
 //@Proxy(lazy = false)
 public class JPAStudent extends JPABaseBean{
 
-
-    @Column(name = "name")
-    private String studentName;
-
     @Column
     private Integer height;
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
 
     public Integer getHeight() {
         return height;
@@ -41,11 +29,5 @@ public class JPAStudent extends JPABaseBean{
         this.height = height;
     }
 
-    @Override
-    public String toString() {
-        return "JPAStudent{" +
-                "studentName='" + studentName + '\'' +
-                ", height=" + height +
-                '}';
-    }
+
 }
