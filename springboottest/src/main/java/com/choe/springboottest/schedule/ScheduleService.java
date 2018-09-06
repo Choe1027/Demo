@@ -1,7 +1,5 @@
 package com.choe.springboottest.schedule;
 
-import com.choe.common.utils.DateUtil;
-
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +22,12 @@ public class ScheduleService {
 
     @Scheduled(fixedRate = 5000)
     public void excutePer5Seconds(){
-        System.out.println(DateUtil.getDateTime(DateUtil.DATE_FORMAT_4,System.currentTimeMillis())+"---excutePer5Seconds执行");
+//        System.out.println(DateUtil.getDateTime(DateUtil.DATE_FORMAT_4,System.currentTimeMillis())+"---excutePer5Seconds执行");
     }
 
     @Scheduled(cron = "0/20 * * * * ? ")
     public void excutCron(){
-        System.out.println(DateUtil.getDateTime(DateUtil.DATE_FORMAT_4,System.currentTimeMillis())+"---excutCron执行");
+//        System.out.println(DateUtil.getDateTime(DateUtil.DATE_FORMAT_4,System.currentTimeMillis())+"---excutCron执行");
 
     }
 }
